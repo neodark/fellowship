@@ -1,4 +1,5 @@
 # Django settings for fellowship project.
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -43,9 +44,22 @@ USE_L10N = True
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
 
+# Getting automatic project path
+PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
+print PROJECT_PATH
+ORIGIN_PATH = os.getcwd()
+os.chdir(PROJECT_PATH)
+TEMP_PATH     = os.getcwd()
+print TEMP_PATH
+os.chdir("../.")
+PROJECT_PATH = os.getcwd()
+print PROJECT_PATH
+os.chdir(ORIGIN_PATH)
+
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
+print MEDIA_ROOT
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
