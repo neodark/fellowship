@@ -1,0 +1,5 @@
+Deploying the project on a webserver:
+=====================================
+
+> fab prepare_deployment:<my_branch_name>
+> fab deploy
