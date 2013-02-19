@@ -2,3 +2,14 @@ Fellowship
 ==========
 
 This project involves people interaction on a website
+
+Installation
+============
+
+On your system : 
+> sudo apt-get install python-virtualenv
+> easy_install -U distribute
+> sudo apt-get install libmysqlclient-dev
+
+Use virtualenv to install package via pip using the requirements.txt file:
+> pip install -r fellowship/requirements.txt
