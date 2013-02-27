@@ -123,6 +123,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    #TEST: added below for authentication
+    'django.contrib.auth.context_processors.auth',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
