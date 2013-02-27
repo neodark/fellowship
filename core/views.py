@@ -2,7 +2,7 @@
 
 # Create your views here.
 
-from django.contrib.auth import login, User
+#from django.contrib.auth import login, User
 from mongoengine.queryset import DoesNotExist
 
 from django.contrib import messages
@@ -13,20 +13,20 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from models import *
 from forms import *
 
-def login_view(request):
-    try:
-        user = User.objects.get(username=request.POST['username'])
-        if user.check_password(request.POST['password']):
-            user.backend = 'mongoengine.django.auth.MongoEngineBackend'
-            login(request, user)
-            request.session.set_expiry(60 * 60 * 1) # 1 hour timeout
-            return HttpResponse(user)
-        else:
-            return HttpResponse('login failed')
-    except DoesNotExist:
-        return HttpResponse('user does not exist')
-    except Exception
-        return HttpResponse('unknown error')
+#def login_view(request):
+#    try:
+#        user = User.objects.get(username=request.POST['username'])
+#        if user.check_password(request.POST['password']):
+#            user.backend = 'mongoengine.django.auth.MongoEngineBackend'
+#            login(request, user)
+#            request.session.set_expiry(60 * 60 * 1) # 1 hour timeout
+#            return HttpResponse(user)
+#        else:
+#            return HttpResponse('login failed')
+#    except DoesNotExist:
+#        return HttpResponse('user does not exist')
+#    except Exception
+#        return HttpResponse('unknown error')
 
 class TagListView(ListView):
     model = Tag
