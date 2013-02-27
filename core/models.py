@@ -22,16 +22,31 @@ class Tag(Document):
 
 class Post(Document):
     created_at = DateTimeField(default=datetime.now)
+	date_modified = DateTimeField(default=datetime.now)
     title = StringField(max_length=255, required=True)
     slug = StringField(required=True)
-    body = StringField()
+	text = StringField(required=True)
+	text_length = IntField()
+	is_published = BooleanField()
+	tags = ListField(ReferenceField(Tag))
     comments = ListField(EmbeddedDocumentField('Comment'))
 
-    def get_absolute_url(self):
-        return reverse('post', kwargs={"slug": self.slug})
+  	def __unicode__(self):
+		return self.title
 
-    def __unicode__(self):
-        return self.title
+	def save(self, *args, **kwargs):
+		self.text_length = len(self.text)
+		return super(Post, self).save(*args, **kwargs)
+
+	def get_absolute_url(self):
+        #return reverse('post', kwargs={"slug": self.slug})
+		return reverse('post-detail', args=[self.id])
+
+	def get_edit_url(self):
+		return reverse('post-update', args=[self.id])
+
+	def get_delete_url(self):
+		return reverse('post-delete', args=[self.id])		
 
     class Meta:
         ordering = ["-created_at"]
@@ -39,5 +54,5 @@ class Post(Document):
 
 class Comment(Document):
     created_at = DateTimeField(default=datetime.now)
-    body = StringField(verbose_name="Comment")
+    text = StringField(verbose_name="Comment")
     author = StringField(verbose_name="Name", max_length=255)
