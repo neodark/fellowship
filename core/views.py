@@ -13,6 +13,13 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from models import *
 from forms import *
 
+#General import
+#from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden, Http404
+#from django.utils import simplejson
+#from django.conf import settings
+#from django.shortcuts import render_to_response, get_object_or_404
+#from django.template import RequestContext
+
 #def login_view(request):
 #    try:
 #        user = User.objects.get(username=request.POST['username'])
@@ -43,7 +50,7 @@ class PostListView(ListView):
     context_object_name = "post_list"
 
     def get_template_names(self):
-        return ["core/post_list.html"]
+        return ["homepage/post_list.html"]
 
     def get_queryset(self):
         posts = Post.objects
