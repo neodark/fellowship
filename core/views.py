@@ -40,7 +40,7 @@ class TagListView(ListView):
     context_object_name = "tag_list"
 
     def get_template_names(self):
-        return ["core/tag_list.html"]
+        return ["homepage/tag_list.html"]
 
     def get_queryset(self):
         return Tag.objects
@@ -66,7 +66,7 @@ class PostCreateView(CreateView):
     form_class = PostForm
 
     def get_template_names(self):
-        return ["core/post_create.html"]
+        return ["homepage/post_create.html"]
 
     def get_success_url(self):
         return reverse('post-list')
