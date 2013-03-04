@@ -14,3 +14,10 @@ On your system :
 
 Use virtualenv to install package via pip using the requirements.txt file:
 > pip install -r fellowship/requirements.txt
+
+Dependencies
+============
+Setting last version of bootstrap
+=================================
+
+> python scripts/setall.py --archive true --bootstrap true
