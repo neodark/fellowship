@@ -2,7 +2,14 @@
 import os
 
 # Getting automatic project path
-PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
+#PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
+PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
+ORIGIN_PATH = os.getcwd()
+os.chdir(PROJECT_PATH)
+os.chdir(".")
+PROJECT_PATH = os.getcwd()
+os.chdir(ORIGIN_PATH)
+
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
