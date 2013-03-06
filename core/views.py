@@ -82,7 +82,7 @@ class PostDetailView(DetailView):
     context_object_name = "post"
 
     def get_template_names(self):
-        return ["core/post_detail.html"]
+        return ["homepage/post_detail.html"]
 
     def get_object(self):
         return Post.objects(id=self.kwargs['pk'])[0]    
@@ -93,7 +93,7 @@ class PostUpdateView(UpdateView):
     context_object_name = "post"
 
     def get_template_names(self):
-        return ["core/post_update.html"]
+        return ["homepage/post_update.html"]
 
     def get_success_url(self):
         return reverse('post-list')
