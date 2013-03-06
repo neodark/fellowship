@@ -24,7 +24,6 @@ class Post(Document):
     created_at = DateTimeField(default=datetime.now)
     date_modified = DateTimeField(default=datetime.now)
     title = StringField(max_length=255, required=True)
-    slug = StringField(required=True)
     text = StringField(required=True)
     text_length = IntField()
     is_published = BooleanField()
@@ -39,7 +38,6 @@ class Post(Document):
         return super(Post, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        #return reverse('post', kwargs={"slug": self.slug})
         return reverse('post-detail', args=[self.id])
 
     def get_edit_url(self):
