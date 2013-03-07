@@ -15,10 +15,10 @@ urlpatterns = patterns('',
     url(r'^$',  include('homepage.urls')),
     url(r'^home/',  include('homepage.urls')),
 
-
     #----------------------
     # Admin url
     #----------------------
+    url(r'^mongonaut/', include('mongonaut.urls')),
     # Uncomment the admin/doc line below to enable admin documentation:
     #url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
