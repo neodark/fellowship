@@ -11,7 +11,7 @@ from core.views import PostListView
 class PostAdmin(MongoAdmin):
 
     # Searches on the title field. Displayed in the DocumentListView.
-    search_fields = ('title',)
+    search_fields = ('title', 'id')
 
     # provide following fields for view in the DocumentListView
     #list_fields = ('title', "published", "pub_date")
@@ -28,7 +28,7 @@ class PostAdmin(MongoAdmin):
 class TagAdmin(MongoAdmin):
 
     # Searches on the title field. Displayed in the DocumentListView.
-    search_fields = ('title',)
+    search_fields = ('title')
 
     # provide following fields for view in the DocumentListView
     #list_fields = ('title', "published", "pub_date")
@@ -37,7 +37,7 @@ class TagAdmin(MongoAdmin):
 class CommentAdmin(MongoAdmin):
 
     # Searches on the title field. Displayed in the DocumentListView.
-    search_fields = ('text',)
+    search_fields = ('text')
 
     # provide following fields for view in the DocumentListView
     #list_fields = ('title', "published", "pub_date")
@@ -51,4 +51,3 @@ class CommentAdmin(MongoAdmin):
 Post.mongoadmin = PostAdmin()
 Tag.mongoadmin = TagAdmin()
 Comment.mongoadmin = CommentAdmin()
-PostListView.mongoadmin = MongoAdmin()
