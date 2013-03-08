@@ -7,6 +7,7 @@ from mongoengine.queryset import DoesNotExist
 
 from django.contrib import messages
 from django.core.urlresolvers import reverse
+from django.core import urlresolvers 
 from django.shortcuts import redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -69,7 +70,7 @@ class PostCreateView(CreateView):
         return ["homepage/post_create.html"]
 
     def get_success_url(self):
-        return reverse('post-list')
+        return HttpResponseRedirect(reverse('post-list'))
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -96,7 +97,7 @@ class PostUpdateView(UpdateView):
         return ["homepage/post_update.html"]
 
     def get_success_url(self):
-        return reverse('post-list')
+        return HttpResponseRedirect(reverse('post-list'))
 
     def form_valid(self, form):
         self.object = form.save()
@@ -110,7 +111,7 @@ class PostDeleteView(DeleteView):
     model = Post
 
     def get_success_url(self):
-        return reverse('post-list')
+        return HttpResponseRedirect(reverse('post-list'))
 
     def get(self, *args, **kwargs):
         """ Skip confirmation page """
