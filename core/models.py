@@ -3,6 +3,7 @@ from datetime import datetime
 
 # Create your models here.
 from django.core.urlresolvers import reverse
+from django.core import urlresolvers
 
 #from mongoengine import ListField, EmbeddedDocumentField
 from mongoengine import *
@@ -20,6 +21,15 @@ class Tag(Document):
     def posts_avg_length(self):
         return Post.objects(tags=self.id).average('text_length')
 
+class Comment(EmbeddedDocument):
+    #created_at = DateTimeField(default=datetime.now)
+    text = StringField(verbose_name="Comment")
+    author = StringField(verbose_name="Name", max_length=255)
+
+    def __unicode__(self):
+        return self.text
+
+
 class Post(Document):
     created_at = DateTimeField(default=datetime.now)
     date_modified = DateTimeField(default=datetime.now)
@@ -28,7 +38,7 @@ class Post(Document):
     text_length = IntField()
     is_published = BooleanField()
     tags = ListField(ReferenceField(Tag))
-    comments = ListField(EmbeddedDocumentField('Comment'))
+    comments = ListField(EmbeddedDocumentField(Comment))
 
     def __unicode__(self):
         return self.title
@@ -46,11 +56,7 @@ class Post(Document):
     def get_delete_url(self):
         return reverse('post-delete', args=[self.id])
 
-    class Meta:
-        ordering = ["-created_at"]
+    #class Meta:
+    #    ordering = ["-created_at"]
 
 
-class Comment(Document):
-    created_at = DateTimeField(default=datetime.now)
-    text = StringField(verbose_name="Comment")
-    author = StringField(verbose_name="Name", max_length=255)
