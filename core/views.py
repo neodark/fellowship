@@ -14,6 +14,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from models import *
 from forms import *
 
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden, Http404
 #General import
 #from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden, Http404
 #from django.utils import simplejson
@@ -70,7 +71,8 @@ class PostCreateView(CreateView):
         return ["homepage/post_create.html"]
 
     def get_success_url(self):
-        return HttpResponseRedirect(reverse('post-list'))
+        #return HttpResponseRedirect(reverse('post-list'))
+        return reverse('post-list')
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -97,7 +99,7 @@ class PostUpdateView(UpdateView):
         return ["homepage/post_update.html"]
 
     def get_success_url(self):
-        return HttpResponseRedirect(reverse('post-list'))
+        return reverse('post-list')
 
     def form_valid(self, form):
         self.object = form.save()
@@ -111,7 +113,7 @@ class PostDeleteView(DeleteView):
     model = Post
 
     def get_success_url(self):
-        return HttpResponseRedirect(reverse('post-list'))
+        return reverse('post-list')
 
     def get(self, *args, **kwargs):
         """ Skip confirmation page """
