@@ -2,6 +2,10 @@ Fellowship
 ==========
 
 This project involves people interaction on a website
+=======
+
+This project involves people interaction on a website
+It's an implementation of the MongoDB tutorial "TumbleLog"
 
 Installation
 ============
@@ -13,3 +17,10 @@ On your system :
 
 Use virtualenv to install package via pip using the requirements.txt file:
 > pip install -r fellowship/requirements.txt
+
+Dependencies
+============
+Setting last version of bootstrap
+=================================
+
+> python scripts/setall.py --archive true --bootstrap true
