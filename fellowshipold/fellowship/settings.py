@@ -1,36 +1,25 @@
-# Django settings for tumblelog project.
+# Django settings for fellowship project.
 import os
-
-# Getting automatic project path
-#PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
-PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
-ORIGIN_PATH = os.getcwd()
-os.chdir(PROJECT_PATH)
-os.chdir(".")
-PROJECT_PATH = os.getcwd()
-os.chdir(ORIGIN_PATH)
-
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+     ('Flavio Tarsetti', 'Tarsetti.Flavio@gmail.com'),
 )
 
 MANAGERS = ADMINS
 
-# Commented to use mongodb through mongoengine
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django_mongodb_engine', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-#        'NAME': 'my_tumble_log',                      # Or path to database file if using sqlite3.
-#        'USER': '',                      # Not used with sqlite3.
-#        'PASSWORD': '',                  # Not used with sqlite3.
-#        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-#        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-#    }
-#}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'fellowship',                      # Or path to database file if using sqlite3.
+        'USER': 'fellowship',                      # Not used with sqlite3.
+        'PASSWORD': 'pwd4fellowship',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+    }
+}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -55,16 +44,29 @@ USE_L10N = True
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
 
+# Getting automatic project path
+PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
+print PROJECT_PATH
+ORIGIN_PATH = os.getcwd()
+os.chdir(PROJECT_PATH)
+TEMP_PATH     = os.getcwd()
+print TEMP_PATH
+os.chdir("../.")
+PROJECT_PATH = os.getcwd()
+print PROJECT_PATH
+os.chdir(ORIGIN_PATH)
+
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-#MEDIA_ROOT = ''
-MEDIA_ROOT = os.path.join(PROJECT_PATH, '..', 'media')
+MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
+print MEDIA_ROOT
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-#MEDIA_URL = ''
-MEDIA_URL = '/'
+MEDIA_URL = ''
+
+LOGIN_REDIRECT_URL = '/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -92,7 +94,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '7po@a#)*0sjkawf@)sej=ay7q=^yc%&amp;mf484!u869=^_#n5mrc'
+SECRET_KEY = 'h*gggrtkhx54l#pi64kq%^ly@a^1nf$b_*pnf5o_yq4z#83ukw'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -111,16 +113,16 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'tumblelog.urls'
+ROOT_URLCONF = 'fellowship.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'tumblelog.wsgi.application'
+WSGI_APPLICATION = 'fellowship.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(PROJECT_PATH, '..','templates'),
+    os.path.join(PROJECT_PATH, 'templates'),
 )
 
 INSTALLED_APPS = (
@@ -130,12 +132,13 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mongonaut',
-    'core',
+    #personal packages#
+    'south',
+
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'django.contrib.admindocs',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -166,16 +169,3 @@ LOGGING = {
         },
     }
 }
-
-AUTHENTICATION_BACKENDS = (
-    'mongoengine.django.auth.MongoEngineBackend',
-)
-
-SESSION_ENGINE = 'mongoengine.django.sessions'
-
-TEST_RUNNER = 'tumblelog_test.tests.MongoTestSuiteRunner'
-
-MONGO_DATABASE_NAME = 'tumblelog'
-
-from mongoengine import connect
-connect(MONGO_DATABASE_NAME)
