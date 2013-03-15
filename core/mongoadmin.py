@@ -4,10 +4,24 @@
 from mongonaut.sites import MongoAdmin
 
 # Import your custom models
-from core.models import Post, Tag, Comment
+from core.models import User, Post, Tag, Comment
 from core.views import PostListView
 
 # Subclass MongoAdmin and add a customization
+class UserAdmin(MongoAdmin):
+    # Searches on the names
+    search_fields = ('last_name', 'first_name')
+    # list names
+    list_fields = ('title', "text", "is_published")
+    def has_view_permission(self, request):
+        return True
+    def has_edit_permission(self, request):
+        return True
+    def has_add_permission(self, request):
+        return True
+    def has_delete_permission(self, request):
+        return True
+
 class PostAdmin(MongoAdmin):
 
     # Searches on the title field. Displayed in the DocumentListView.
@@ -48,6 +62,7 @@ class CommentAdmin(MongoAdmin):
 # Then attach PostAdmin to your model
 # Instantiate the MongoAdmin class
 # Then attach the mongoadmin to your model
+User.mongoadmin = UserAdmin()
 Post.mongoadmin = PostAdmin()
 Tag.mongoadmin = TagAdmin()
 Comment.mongoadmin = CommentAdmin()
