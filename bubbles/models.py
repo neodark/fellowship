@@ -13,3 +13,6 @@ class Bubble(Document):
     author = ReferenceField(User)
     attendees = models.ManyToManyField()
 
+    def __unicode__(self):
+        return self.description
+
