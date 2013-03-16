@@ -10,9 +10,9 @@ from bubbles.models import Bubble
 # Subclass MongoAdmin and add a customization
 class BubbleAdmin(MongoAdmin):
     # Searches on the names
-    search_fields = ('description', 'first_name')
+    search_fields = ('description', 'author')
     # list names
-    list_fields = ('title', "text", "is_published")
+    list_fields = ('description', "created_at", "attendees", "author")
     def has_view_permission(self, request):
         return True
     def has_edit_permission(self, request):
