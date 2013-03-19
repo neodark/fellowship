@@ -2,7 +2,7 @@
 
 {% block content %}
 	{% for post in post_list %}		
-		<div style="margin-bottom: 20px;">
+		<div style="margin-bottom: 20px; border:1px solid#ddd; padding:9px">
 			<h4>{{ post.title }}</h4>
 			{{ post.text|linebreaks }}
 			{% if post.tags %}
