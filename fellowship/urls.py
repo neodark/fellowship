@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     #----------------------
     url(r'^$',  include('homepage.urls')),
     url(r'^home/',  include('homepage.urls')),
+    url(r'^bubbles/',  include('bubbles.urls')),
 
     #----------------------
     # Admin url
@@ -32,7 +33,7 @@ urlpatterns = patterns('',
 if settings.DEBUG:
     urlpatterns += patterns('',
         (r'^css/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT + '/css'}),
-        (r'^img/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT + '/images'}),
+        (r'^img/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT + '/img'}),
         (r'^js/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT + '/js'}),
         #(r'^files/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT + '/files'}),
     )

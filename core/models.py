@@ -9,6 +9,13 @@ from django.core import urlresolvers
 from mongoengine import *
 from mongoengine.django.auth import User
 
+class User(Document):
+    last_name = StringField(max_length=255)
+    first_name = StringField(max_length=255)
+
+    def __unicode__(self):
+        return self.last_name+" "+self.first_name
+
 class Tag(Document):
     title = StringField(max_length=200, required=True)
 
