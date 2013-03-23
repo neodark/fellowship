@@ -29,7 +29,7 @@ div.block .input{
 {% endcomment %}
 	{% for post in post_list %}		
 		<div class="block" style="margin-bottom: 20px; border:1px solid#ddd;-moz-border-radius: 25px 10px / 10px 25px; border-radius: 25px 10px / 10px 25px; padding:9px; background-image:url('{{ MEDIA_URL }}img/my_bubbles.jpg'); background-size:105px; background-repeat:no-repeat; background-position:center;"> 
-			<h4>{{ post.title }}</h4>
+			<h4>{{ post.title|capfirst }}</h4>
 			{{ post.text|linebreaks }}
 			{% if post.tags %}
 			Tags:
