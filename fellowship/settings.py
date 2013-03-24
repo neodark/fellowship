@@ -10,6 +10,12 @@ os.chdir(".")
 PROJECT_PATH = os.getcwd()
 os.chdir(ORIGIN_PATH)
 
+# Registration 
+ACCOUNT_ACTIVATION_DAYS = 7
+SITE = "localhost"
+# Debug smtp email
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -127,12 +133,13 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
+    #'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mongonaut',
     'core',
     'bubbles',
+    'registration',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
