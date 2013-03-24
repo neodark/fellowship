@@ -50,6 +50,8 @@ def text_response(content):
 # Load Services page
 # -----------------------------------------------------------
 from core.models import Post
+from django.contrib.auth.decorators import login_required
+@login_required
 def bubbles(request):
 
     test = "test"
