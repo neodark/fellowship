@@ -65,6 +65,7 @@ if __name__ == '__main__':
     
     parser.add_option("--media_dir",dest="media_dir", help = "media/ files",default="")
     parser.add_option("--bootstrap",dest="bootstrap", help = "bootstrap dependencies",default="false")
+    parser.add_option("--django-registration",dest="django-registration", help = "django-registration dependencies MongoEngine/templates",default="false")
     parser.add_option("--archive",dest="archive", help = "archive previously working system",default="false")
     parser.add_option("--archive_dir",dest="archive_dir", help = "archive directory name",default="archive")
     parser.add_option("-o","--output_folder",dest="output_folder", help = "output folder where to store files", default=".");
@@ -90,6 +91,7 @@ if __name__ == '__main__':
     print "--------------------------------------------"
     print "  media directory: %s"% options.media_dir
     print "  bootstrap: %s"% options.bootstrap
+    print "  django-registration: %s"% options.django-registration
     print "  archive: %s"% options.archive
     print "  archive directory: %s"% options.archive_dir
     print "  output directory: %s" % (".")
@@ -148,6 +150,9 @@ if __name__ == '__main__':
 
         #remove directory
         os.system("rm -fr dependencies/bootstrap")
+
+    #TODO: implement option
+    #if options.django-registration == "true":
 
     if options.verbosity == "true":
         sys.stdout.write('.')
