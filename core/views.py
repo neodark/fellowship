@@ -22,21 +22,6 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidde
 #from django.shortcuts import render_to_response, get_object_or_404
 #from django.template import RequestContext
 
-#def login_view(request):
-#    try:
-#        user = User.objects.get(username=request.POST['username'])
-#        if user.check_password(request.POST['password']):
-#            user.backend = 'mongoengine.django.auth.MongoEngineBackend'
-#            login(request, user)
-#            request.session.set_expiry(60 * 60 * 1) # 1 hour timeout
-#            return HttpResponse(user)
-#        else:
-#            return HttpResponse('login failed')
-#    except DoesNotExist:
-#        return HttpResponse('user does not exist')
-#    except Exception
-#        return HttpResponse('unknown error')
-
 class TagListView(ListView):
     model = Tag
     context_object_name = "tag_list"
