@@ -15,6 +15,7 @@ urlpatterns = patterns('',
     url(r'^$',  include('homepage.urls')),
     url(r'^home/',  include('homepage.urls')),
     url(r'^bubbles/',  include('bubbles.urls')),
+    url(r'^accounts/',  include('registration.urls')),
 
     #----------------------
     # Admin url
