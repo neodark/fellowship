@@ -9,12 +9,21 @@ from django.core import urlresolvers
 from mongoengine import *
 from mongoengine.django.auth import User
 
-class User(Document):
-    last_name = StringField(max_length=255)
-    first_name = StringField(max_length=255)
-
-    def __unicode__(self):
-        return self.last_name+" "+self.first_name
+#class Profile(Document):
+#    user = ReferenceField(User)
+#    #def set_password(self, raw_password):
+#    #    import random
+#    #    algo = 'sha1'
+#    #    salt = get_hexdigest(algo, str(random.random()), str(random.random()))[:5]
+#    #    hsh = get_hexdigest(algo, salt, raw_password)
+#    #    self.password = '%s$%s$%s' % (algo, salt, hsh)
+#
+##class User(Document):
+##    last_name = StringField(max_length=255)
+##    first_name = StringField(max_length=255)
+##
+##    def __unicode__(self):
+##        return self.last_name+" "+self.first_name
 
 class Tag(Document):
     title = StringField(max_length=200, required=True)
