@@ -65,7 +65,7 @@ if __name__ == '__main__':
     
     parser.add_option("--media_dir",dest="media_dir", help = "media/ files",default="")
     parser.add_option("--bootstrap",dest="bootstrap", help = "bootstrap dependencies",default="false")
-    parser.add_option("--django-registration",dest="django-registration", help = "django-registration dependencies MongoEngine/templates",default="false")
+    parser.add_option("--django_registration",dest="django_registration", help = "django-registration dependencies MongoEngine/templates",default="false")
     parser.add_option("--archive",dest="archive", help = "archive previously working system",default="false")
     parser.add_option("--archive_dir",dest="archive_dir", help = "archive directory name",default="archive")
     parser.add_option("-o","--output_folder",dest="output_folder", help = "output folder where to store files", default=".");
@@ -91,7 +91,7 @@ if __name__ == '__main__':
     print "--------------------------------------------"
     print "  media directory: %s"% options.media_dir
     print "  bootstrap: %s"% options.bootstrap
-    print "  django-registration: %s"% options.django-registration
+    print "  django-registration: %s"% options.django_registration
     print "  archive: %s"% options.archive
     print "  archive directory: %s"% options.archive_dir
     print "  output directory: %s" % (".")
@@ -117,13 +117,28 @@ if __name__ == '__main__':
         "media_%s_%s_%s_%s_%s_%s"%(dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second)))
         os.system("rm -fr media_%s_%s_%s_%s_%s_%s"%(dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second))
         os.chdir("%s"%rootPath)
+       
+        os.makedirs(rootPath+"/tmp")
+        os.makedirs(rootPath+"/tmp/js")
+        os.system("cp -r %s/libraries/jquery/jquery-1.9.1.js %s/tmp/js/jquery.js"%(rootPath, rootPath))
+        os.system("cp -r %s/libraries/jquery/jquery-1.9.1.min.js %s/tmp/js/jquery.min.js"%(rootPath, rootPath))
+        os.makedirs(rootPath+"/tmp/img")
+        os.system("cp -r %s/media/img/*.jpg %s/tmp/img/."%(rootPath, rootPath))
+        os.system("cp %s/media/README %s/tmp/."%(rootPath, rootPath))
         #remove directory
         shutil.rmtree(rootPath+"/media")
         #create media directories
         os.makedirs(rootPath+"/media")
+        os.system("cp %s/tmp/README %s/media/."%(rootPath, rootPath))
+        #remove directory
+        os.system("cp %s/media/README ."%rootPath)
         os.makedirs(rootPath+"/media/css")
         os.makedirs(rootPath+"/media/js")
+        os.system("cp -r %s/tmp/js/*.js %s/media/js/."%(rootPath, rootPath))
         os.makedirs(rootPath+"/media/img")
+        os.system("cp -r %s/tmp/img/* %s/media/img/."%(rootPath, rootPath))
+
+        #shutil.rmtree(rootPath+"/tmp")
 
     if options.bootstrap == "true":
         #if directories don't exist - create
@@ -148,11 +163,20 @@ if __name__ == '__main__':
         os.system("mv dependencies/bootstrap/js/* media/js/bootstrap/.")
         os.system("mv dependencies/bootstrap/img/* media/img/bootstrap/.")
 
+        #correct paths to images
+        os.system("sed -i.bak s/\"..\/img\/glyphicons-halflings.png\"/\"..\/..\/img\/bootstrap\/glyphicons-halflings.png\"/g media/css/bootstrap/bootstrap.css")
+        os.system("sed -i.bak s/\"..\/img\/glyphicons-halflings.png\"/\"..\/..\/img\/bootstrap\/glyphicons-halflings.png\"/g media/css/bootstrap/bootstrap.min.css")
+        os.system("sed -i.bak s/\"..\/img\/glyphicons-halflings-white.png\"/\"..\/..\/img\/bootstrap\/glyphicons-halflings-white.png\"/g media/css/bootstrap/bootstrap.css")
+        os.system("sed -i.bak s/\"..\/img\/glyphicons-halflings-white.png\"/\"..\/..\/img\/bootstrap\/glyphicons-halflings-white.png\"/g media/css/bootstrap/bootstrap.min.css")
+        #remove .bak files
+        os.system("rm -fr %s/%s"%(rootPath, "media/css/bootstrap/bootstrap.css.bak"))
+        os.system("rm -fr %s/%s"%(rootPath, "media/css/bootstrap/bootstrap.min.css.bak"))
+
         #remove directory
         os.system("rm -fr dependencies/bootstrap")
 
     #TODO: implement option
-    #if options.django-registration == "true":
+    #if options.django_registration == "true":
 
     if options.verbosity == "true":
         sys.stdout.write('.')
