@@ -131,14 +131,13 @@ if __name__ == '__main__':
         os.makedirs(rootPath+"/media")
         os.system("cp %s/tmp/README %s/media/."%(rootPath, rootPath))
         #remove directory
-        os.system("cp %s/media/README ."%rootPath)
         os.makedirs(rootPath+"/media/css")
         os.makedirs(rootPath+"/media/js")
         os.system("cp -r %s/tmp/js/*.js %s/media/js/."%(rootPath, rootPath))
         os.makedirs(rootPath+"/media/img")
         os.system("cp -r %s/tmp/img/* %s/media/img/."%(rootPath, rootPath))
 
-        #shutil.rmtree(rootPath+"/tmp")
+        shutil.rmtree(rootPath+"/tmp")
 
     if options.bootstrap == "true":
         #if directories don't exist - create
