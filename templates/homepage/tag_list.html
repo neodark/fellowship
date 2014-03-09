@@ -4,7 +4,7 @@
 	<ul>
 	{% for tag in tag_list %}		
 		<li>
-			<a href="{% url post-list %}?tag={{ tag.id }}">{{ tag }}</a> 
+			<a href="{% url 'post-list' %}?tag={{ tag.id }}">{{ tag }}</a> 
 			<span class="label">count: {{ tag.posts_count }}</span>
 			<span class="label">avg. length: {{ tag.posts_avg_length }}</span>
 		</li>
