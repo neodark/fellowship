@@ -6,7 +6,7 @@ Forms and validation code for user registration.
 
 from django import forms
 from django.contrib.auth.forms import PasswordResetForm as AuthPRF
-from django.contrib.auth.hashers import UNUSABLE_PASSWORD
+#from django.contrib.auth.hashers import UNUSABLE_PASSWORD
 from django.utils.translation import ugettext_lazy as _
 from mongoengine.django.auth import User
 
@@ -160,6 +160,18 @@ class RegistrationFormNoFreeEmail(RegistrationForm):
 
 class PasswordResetForm(AuthPRF):
 
+    def is_password_usable(pw):
+        # like Django's is_password_usable, but only checks for unusable
+        # passwords, not invalidly encoded passwords too.
+        try:
+            # 1.5
+            from django.contrib.auth.hashers import UNUSABLE_PASSWORD
+            return pw != UNUSABLE_PASSWORD
+        except ImportError:
+            # 1.6
+            from django.contrib.auth.hashers import UNUSABLE_PASSWORD_PREFIX
+            return not pw.startswith(UNUSABLE_PASSWORD_PREFIX)
+
     def clean_email(self):
         """
         Validates that an active user exists with the given email address.
@@ -170,7 +182,7 @@ class PasswordResetForm(AuthPRF):
         if not len(self.users_cache):
             raise forms.ValidationError(self.error_messages['unknown'])
 
-        if self.users_cache.filter(password=UNUSABLE_PASSWORD).count():
+        if self.users_cache.filter(not is_password_usable(password)).count():
             raise forms.ValidationError(self.error_messages['unusable'])
 
         return email
