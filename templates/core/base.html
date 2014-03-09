@@ -25,9 +25,9 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li><a href="/">Home</a></li>
-              <li><a href="{% url post-create %}">Create post</a></li>
-              <li><a href="{% url tag-list %}">Tags</a></li>
-              <li><a href="{% url post-list %}?all_posts">All posts</a></li>
+              <li><a href="{% url 'post-create' %}">Create post</a></li>
+              <li><a href="{% url 'tag-list' %}">Tags</a></li>
+              <li><a href="{% url 'post-list' %}?all_posts">All posts</a></li>
               <li><a href="/bubbles">Bubbles</a></li>
               <li style="padding-left:250px;"><a href="/accounts/login"><i class="icon-user icon-white"></i> Login</a></li>
               <li><a href="/accounts/register">Register</a></li>
