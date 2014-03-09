@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 from django.conf import settings
 
 from core.views import PostListView, PostCreateView, TagListView, PostDetailView, PostUpdateView, PostDeleteView
